@@ -1,0 +1,51 @@
+name: Talent Reminders # description of this workflow, can be anything you want
+
+# triggers when pushing a tag
+on:
+  push:
+    tags:
+      - '**'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Generate Changelog
+        run: |
+          # Get the current and previous tags
+          CURRENT_TAG="${GITHUB_REF#refs/tags/}"
+          PREVIOUS_TAG=$(git tag --sort=-creatordate | grep -v "^${CURRENT_TAG}$" | head -n1)
+
+          {
+            echo "# ${CURRENT_TAG}"
+            echo ""
+            if [ -n "$PREVIOUS_TAG" ]; then
+              echo "### Changes since ${PREVIOUS_TAG}"
+              echo ""
+              # Get commits between tags, excluding merge commits
+              git log "${PREVIOUS_TAG}..${CURRENT_TAG}" --no-merges --pretty=format:"- %s (%h)" |
+                grep -v "^- Merge pull request" |
+                grep -v "^- Merge branch"
+            else
+              echo "### Changes"
+              echo ""
+              git log "${CURRENT_TAG}" --no-merges --pretty=format:"- %s (%h)" |
+                grep -v "^- Merge pull request" |
+                grep -v "^- Merge branch"
+            fi
+            echo ""
+          } > CHANGELOG.md
+
+      - name: Package and Release
+        uses: BigWigsMods/packager@master
+        env:
+          CF_API_KEY: ${{ secrets.CF_API_KEY }}
+          WOWI_API_TOKEN: ${{ secrets.WOWI_API_TOKEN }}
+          WAGO_API_TOKEN: ${{ secrets.WAGO_API_TOKEN }}
+          # for github releases, this secret is automatically provided to the workflow
+          GITHUB_OAUTH: ${{ secrets.GITHUB_TOKEN }}
