@@ -1,10 +1,12 @@
 ## Interface: 120100, 120105
-## Title: Talent Reminders
+## Title: |cff009cffTalent|r |cffffd100Reminders|r
 ## Notes: Reminds you which talents to pick when entering specific dungeons. Add your own via /tr.
 ## Author: muleyo
 ## Version: 1.0.0
 ## IconTexture: Interface\Icons\Ability_Marksmanship
 ## SavedVariables: TalentRemindersDB
+## X-Curse-Project-ID: 1726765
+## Category: muleyo AddOns
 
 GUI.lua
 Instances.lua
