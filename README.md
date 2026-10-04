@@ -2,11 +2,11 @@
 
 Ever zoned into a dungeon and realized, three pulls in, that you're still running your open-world talents? Yeah, me too. This addon fixes that.
 
-You tell it which talents you want for a given dungeon or raid, and when you zone in it pops up a small window showing which ones are active and which ones you still need to swap. Once everything's set, it gets out of your way.
+You tell it which talents you want for a given dungeon, and when you zone in it pops up a small window showing which ones are active and which ones you still need to swap. Once everything's set, it gets out of your way.
 
 ## ✨ What it does
 
-- 🗺️ **Per-instance talent lists.** Pick a dungeon or raid, pick the talents you want there, done.
+- 🗺️ **Per-instance talent lists.** Pick a dungeon, pick the talents you want there, done.
 - ✅ **Clear status at a glance.** Each talent shows up as an icon with a green border if it's active, or a red one if you need to swap.
 - 💬 **Notes.** Add a short note to any talent ("single target only", "for the interrupt on boss 2") and it shows in the tooltip.
 - 🙈 **Auto-hides** once all your talents are in place (you can turn this off).
@@ -55,8 +55,6 @@ All of these live at the bottom of the settings window:
 - **Hide when all active**: closes the reminder when nothing needs swapping.
 - **Chat alert**: also prints a message in chat when talents are missing.
 - **TTS alert**: says "Talents missing" out loud via the game's text-to-speech.
-
-By default the reminder shows for dungeons, raids and scenarios.
 
 ## 🗂️ Project layout
 
